@@ -1,5 +1,9 @@
-# ignore Quartus II generated files
+# Need to keep all HDL files and timing constraint files
+# *.vhd
+# *.v
+# *.sdc
 
+# ignore Quartus II generated files
 *_generation_script*
 *_inst.vhd
 *.bak
@@ -29,7 +33,6 @@
 *sopc_*
 
 # ignore Quartus II generated folders
-
 */db/
 */incremental_db/
 */simulation/
@@ -38,4 +41,4 @@
 */*_sim/
 incremental_db/
 db/
-_output_files/
+output_files/
