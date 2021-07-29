@@ -3,12 +3,11 @@
 A.Elykov (AlexElykov@yahoo.com)
 
 ### Description:
-Custom firmware for the UFPGA on the CAEN V2495 general purpose board
-
+Custom firmware for the UFPGA on the CAEN V2495 general purpose board.
 
 ### Prerequisites:
 - Altera Quartus II 13.0sp1 (web/full edition) or higher
-- Cyclone V FPGA has to be supported. 
+- Cyclone V FPGA has to be supported
 - Note: to be able to compile this on the free web version, might need to disable the SignalTap logic analyser in Assignments - Settings - SignalTap II
 
 ### Architecture: 
