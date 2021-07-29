@@ -9,14 +9,10 @@
 --
 --    Functions
 --    ------------------------
---
 --    Declaration of constants and types for register arrays.
---
--- -----------------------------------------------------------------------
--- $Id$
--- -----------------------------------------------------------------------
+
 library IEEE;
-    use IEEE.std_logic_1164.all;
+use IEEE.std_logic_1164.all;
 
 package V2495_pkg is
 
@@ -28,10 +24,9 @@ package V2495_pkg is
     
     -- Default value for unmapped registers
     constant UNMAPPED_REGISTER_VALUE : std_logic_vector(31 downto 0) := X"DEADFACE";
-
-    constant N_MONITOR_REGS : integer := 0; -- Number of mapped monitor regs
-    constant N_CONTROL_REGS : integer := 0; -- Number of mapped control regs 
-    
+	 
+	 constant N_CONTROL_REGS : integer := 4; -- Number of mapped control regs 
+    constant N_MONITOR_REGS : integer := 4; -- Number of mapped monitor regs    
     -- Types for monitor and control register arrays
     type CONTROL_REGS_T is ARRAY (0 to N_CONTROL_REGS-1) of 
                            STD_LOGIC_VECTOR(31 downto 0);
@@ -47,6 +42,7 @@ package V2495_pkg is
     -- address CONTROL_REGS_REGION_START.
     -- Register address is 32-bit aligned and it can be calculated based on its
     -- index in the registers array.
+	 
     -- Monitor registers are mapped to address :
     --     MONITOR_REGS_REGION_START+4*i (i = index in the monitor regs array)
     -- Control registers are mapped to address :
