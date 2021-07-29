@@ -9,9 +9,9 @@ use work.V2495_pkg.all;
 
 entity status_led is
 	port(
-		clk			: in std_logic;
-		Pulser_in 	: in std_logic;
-		LED_mode		: out std_logic;
+		clk        : in std_logic;
+		Pulser_in  : in std_logic;
+		LED_mode   : out std_logic;
 		-- Register interface          
 		ctrl_regs  : in   CONTROL_REGS_T     
 	);

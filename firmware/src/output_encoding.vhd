@@ -10,8 +10,8 @@ use work.V2495_pkg.all;
 
 entity output_encoding is
 	port(
-		clk			: in std_logic;
-		Busy_on		: in std_logic;
+		clk         : in std_logic;
+		Busy_on     : in std_logic;
 		Busy_start 	: out std_logic;
 		Busy_stop	: out std_logic
 	);

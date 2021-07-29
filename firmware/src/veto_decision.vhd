@@ -9,10 +9,10 @@ use work.V2495_pkg.all;
 
 entity veto_decision is
 	port(
-		clk			: in std_logic;
-		A 				: in std_logic_vector(31 downto 0);
-		B				: in std_logic_vector(31 downto 0);
-		Busy_on		: out std_logic;
+		clk     : in std_logic;
+		A       : in std_logic_vector(31 downto 0);
+		B       : in std_logic_vector(31 downto 0);
+		Busy_on : out std_logic;
 		-- Register interface          
 		ctrl_regs  : in   CONTROL_REGS_T;
 		mon_regs   : out  MONITOR_REGS_T		
@@ -22,11 +22,11 @@ end veto_decision;
 
 architecture rtl of veto_decision is
 
-signal counter			: unsigned(31 downto 0) := (others => '0');
-signal max_counter	: unsigned(31 downto 0) := (others => '0');
-signal ones				: unsigned(63 downto 0) := (others => '1');
-signal busy_check 	: std_logic;
-signal input 			: std_logic_vector(63 downto 0) := (others => '0');
+signal counter		: unsigned(31 downto 0) := (others => '0');
+signal max_counter: unsigned(31 downto 0) := (others => '0');
+signal ones			: unsigned(63 downto 0) := (others => '1');
+signal busy_check	: std_logic;
+signal input		: std_logic_vector(63 downto 0) := (others => '0');
 
 begin
 -- Output firmware version to read only monitor register
@@ -39,7 +39,8 @@ max_counter	<= unsigned(ctrl_regs(1));
 
 
 -- -------------------------------------------------
-input 		<= A & B;
+input <= A & B;
+
 -- Note that busy LVDS in CAEN V1724 is an active low signal 
 	check_busy : process(clk) 
 	begin

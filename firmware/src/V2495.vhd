@@ -134,17 +134,17 @@ architecture rtl of V2495 is
           
 begin -- -------------------------------------------------
 
-	-- Set the level and direction of the used ports
-	-- noEX = set output(0), input(1) 
-	-- SELX = set level NIM(0), TTL(1)
+   -- Set the level and direction of the used ports
+   -- noEX = set output(0), input(1) 
+   -- SELX = set level NIM(0), TTL(1)
 	
-	-- Ports G are input NIM 
-	nOEG 	<= '1';
-	SELG	<= '0';
-	-- Ports E, F are NIM outputs
-	SELE 	<= '0';
+   -- Ports G are input NIM 
+   nOEG 	<= '1';
+   SELG	<= '0';
+   -- Ports E, F are NIM outputs
+   SELE 	<= '0';
    nOEE 	<= '0';
-	SELF 	<= '0';
+   SELF 	<= '0';
    nOEF 	<= '0';
 
 	-- Unused output ports are explicitally set to HiZ
@@ -155,7 +155,7 @@ begin -- -------------------------------------------------
    D    <= (others => 'Z');
    GD_START <= (others => 'Z');
 	-- Set the E ports unused for now
-	E    <= (others => 'Z');
+   E    <= (others => 'Z');
 
    -- Local bus Interrupt request
    nINT <= '1';
@@ -169,55 +169,55 @@ begin -- -------------------------------------------------
 	-- ----------------------------------------------------
    I_VETO_DECISION: entity work.veto_decision  
 		port map (
-			clk         => CLK,   
-			-- Register interface  
+         clk         => CLK,   
+         -- Register interface  
          ctrl_regs   => ctrl_regs,
-			mon_regs    => mon_regs,
-			-- check if there is an LVDS busy
-			A				=> A,
-			B				=> B,
-			Busy_on		=> Busy_on
-        );
+         mon_regs    => mon_regs,
+         -- check if there is an LVDS busy
+         A			=> A,
+         B			=> B,
+         Busy_on	=> Busy_on
+		);
 
    -- Encode start and stop of busy veto as 1 clk NIM
 	-- ----------------------------------------------------
    I_OUT_ENCODE: entity work.output_encoding  
 		port map (
-			clk         => CLK,   
-			-- Start and stop signals
-			Busy_on 		=> Busy_on,
-			Busy_start 	=> Busy_start,
-			Busy_stop	=> Busy_stop
-        );
+         clk         => CLK,   
+         -- Start and stop signals
+         Busy_on     => Busy_on,
+         Busy_start  => Busy_start,
+         Busy_stop   => Busy_stop
+		);
 		  
    -- Check if there is an external trigger 
 	-- ----------------------------------------------------
    I_STATUS_LED: entity work.status_led
 		port map (
-			clk         => CLK,
-			-- Register interface  
-			ctrl_regs   => ctrl_regs,
-			-- LED input mode check
-			Pulser_in	=> GIN(1),
-			LED_mode		=> LED_mode
+         clk         => CLK,
+         -- Register interface  
+         ctrl_regs   => ctrl_regs,
+         -- LED input mode check
+         Pulser_in   => GIN(1),
+         LED_mode    => LED_mode
 		);
 	 
    --  Local Bus slave interface
 	-- ----------------------------------------------------
    I_LBUS_INTERFACE: entity work.lb_int
 		port map (
-			clk         => CLK,
-			reset       => reset,
+         clk         => CLK,
+         reset       => reset,
          -- Local Bus            
          nBLAST      => nBLAST,   
          WnR         => WnR,      
          nADS        => nADS,
-			nREADY      => nREADY,
-			LAD         => LAD,
-			-- Register interface  
+         nREADY      => nREADY,
+         LAD         => LAD,
+         -- Register interface  
          ctrl_regs   => ctrl_regs,
-			mon_regs    => mon_regs,
-			-- Gate and Delay controls
+         mon_regs    => mon_regs,
+         -- Gate and Delay controls
 			gd_data_wr  => gd_data_wr,       
          gd_data_rd  => gd_data_rd,         
          gd_command  => gd_command,
@@ -245,14 +245,14 @@ begin -- -------------------------------------------------
 	-- ----------------------------------------------------
 
 		-- Hardware outputs
-		F(0)		<= TRG_LED;
-		F(1)		<= Veto_out;
-		F(2)		<= Busy_start;
-		F(3)		<= Busy_stop;
+      F(0)  <= TRG_LED;
+      F(1)  <= Veto_out;
+      F(2)  <= Busy_start;
+      F(3)  <= Busy_stop;
 		
-		-- User LED outputs
-		LED(0)	<= Veto_out;
-		LED(1)	<= LED_mode;
+      -- User LED outputs
+      LED(0)	<= Veto_out;
+      LED(1)	<= LED_mode;
 
 end rtl;
    

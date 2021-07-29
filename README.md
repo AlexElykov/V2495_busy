@@ -22,6 +22,6 @@ This is a generic busy firmware for the module and it can be easily expanded for
 * README.md (this file)
 * firmware\src
 * firmware\
-* .rbd – compiled firmware file
+* .rpd – compiled firmware file
 
 

@@ -26,7 +26,7 @@ package V2495_pkg is
     constant UNMAPPED_REGISTER_VALUE : std_logic_vector(31 downto 0) := X"DEADFACE";
 	 
 	 constant N_CONTROL_REGS : integer := 4; -- Number of mapped control regs 
-    constant N_MONITOR_REGS : integer := 4; -- Number of mapped monitor regs    
+	 constant N_MONITOR_REGS : integer := 4; -- Number of mapped monitor regs    
     -- Types for monitor and control register arrays
     type CONTROL_REGS_T is ARRAY (0 to N_CONTROL_REGS-1) of 
                            STD_LOGIC_VECTOR(31 downto 0);
