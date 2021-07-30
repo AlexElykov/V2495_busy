@@ -6,9 +6,11 @@ A.Elykov (AlexElykov@yahoo.com)
 Custom firmware for the UFPGA on the CAEN V2495 general purpose board.
 
 ### Prerequisites:
-- Altera Quartus II 13.0sp1 (web/full edition) or higher
+- Altera Quartus II 13.0 (web/full edition) or higher
 - Cyclone V FPGA has to be supported
 - Note: to be able to compile this on the free web version, might need to disable the SignalTap logic analyser in Assignments - Settings - SignalTap II
+- To run AlteraModelsim need to install at least the following: sudo apt-get install lib32ncurses5 lib32z1 libxft2:i386  
+- Detailed instructions on setting up AlteraModelsim package installation and more are here: [LINK](http://javierd.github.io/degree/ModelSim%20Linux%20installation.html)
 
 ### Architecture: 
 This is a generic busy firmware for the module and it can be easily expanded for other usages.
