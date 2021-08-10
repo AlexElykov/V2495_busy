@@ -15,7 +15,7 @@
 'refer to the applicable agreement for further details, at
 'https://fpgasoftware.intel.com/eula.
 
-'Device #1: 5CGXBC4C6 - D:/VHDL_programming/V2495_busy-master/firmware/output_files/V2495user_template.sof Tue Aug 10 10:34:13 2021
+'Device #1: 5CGXBC4C6 - D:/VHDL_programming/V2495_busy-master/firmware/output_files/V2495user_template.sof Tue Aug 10 11:10:05 2021
 
 
 NOTE "CREATOR" "QUARTUS PRIME JAM COMPOSER 20.1";
@@ -7099,4 +7099,4 @@ ENDPROC;
 
 
 ' END OF FILE
-CRC AB43;
+CRC C1DA;
