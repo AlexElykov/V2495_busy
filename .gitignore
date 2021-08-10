@@ -44,5 +44,5 @@ db/
 hc_output/
 # keep the .cof and .rpd
 output_files/*
-!output_files/rpd_gen.co!
+!output_files/rpd_gen.cof
 !output_files/.rpd
