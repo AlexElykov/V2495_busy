@@ -3,7 +3,7 @@
 # *.v
 # *.sdc
 
-# ignore Quartus II generated files
+# Ignore Quartus II generated files
 *_generation_script*
 *_inst.vhd
 *.bak
@@ -32,7 +32,7 @@
 *example*
 *sopc_*
 
-# ignore Quartus II generated folders
+# Ignore Quartus II generated folders
 */db/
 */incremental_db/
 */simulation/
@@ -41,5 +41,7 @@
 */*_sim/
 incremental_db/
 db/
-output_files/
 hc_output/
+# keep the .cof
+output_files/*
+!output_files/rpd_gen.cof
