@@ -26,7 +26,7 @@
 *.sof
 *.sopc_builder
 *.summary
-*.tcl
+#*.tcl - need for compiliation
 *.txt # Explicitly add any text files used
 *~
 *example*
