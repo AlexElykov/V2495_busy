@@ -45,5 +45,5 @@ hc_output/
 # keep the .cof and .rpd
 /firmware/output_files/*
 !/firmware/output_files/rpd_gen.cof
-!/firmware/output_files/.rpd
+!/firmware/output_files/*.rpd
 
