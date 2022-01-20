@@ -2,7 +2,7 @@
 -- -----------------------------------------------------------------------
 -- V2495 top level
 -- -----------------------------------------------------------------------
---  Date        : July 2021
+--  Date        : February 2022
 
 --  Note: to be able to compile this, just in case disable the SignalTap
 --  logic analyser in Assignments->Settings->SignalTap II
@@ -15,9 +15,8 @@
 -- -----------------------------------------------------------------------
 -- Use of VHDL native libraries
 -- The firmware is less bloated, uses separate entities not components
--- User defined registers implemented in the V2495_pkg not in the HAL
--- Does not have the XENON1T/nT High Energy Veto or Veto_TRG support
-
+-- User defined 32-bit registers implemented in the V2495_pkg not in the HAL
+-- Does not have the XENON1T/nT High Energy Veto
 
 -- Currently used registers
 -- -----------------------------------------------------------------------
@@ -33,9 +32,32 @@
 --  mon_regs(3) - 0x100C - R - 
 
 
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+
+-- ######## To Do #######: Feb 2022
+
+-- a. simulate firmware performance -- see if there are any cases of double stop NIMs?
+-- a.1. in simulation use a distribution of input signals going from sparse to nearby in time to see how logic reacts
+
+-- b. implement veto_trg, in case we want to generate pulses via the V2495 board
+-- c. make sure/read up that registers indeed can be written via VME, and no dedicated SPI is needed!
+-- d.
+-- ######################
+
+
+-- Some begninner notes on setting things up with Altera Quartus Prime Lite Edition + ModelSim
+-- -----------------------------------------------------------------------
+-- A. One can get Quartus to produce a shell testbench .vht file by selecting Processing -> Start > Start Test Bench Template Writer.
+-- the file with some default signals will be saved in /simulation/modelsim/*.vht
+
+-- B. Open up the ModelSim simulation tool via Tools -> Run Simulation
+-- in Modelsim -> compile -> select the .vht file and compile it
+-- in Modelsim -> Simulate -> Start Simulation -> "work" -> choose the testbench name
+
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use work.V2495_pkg.all;
 
 -- ----------------------------------------------
@@ -111,14 +133,13 @@ end V2495;
 architecture rtl of V2495 is
 
 	 -- User temp signals
-	signal Busy_on		: std_logic;
-	signal TRG_LED		: std_logic;
-	signal LED_mode 	: std_logic;
-	signal Veto_out	: std_logic;
-	signal Busy_stop	: std_logic;
-	signal Busy_start	: std_logic;
+	signal Busy_on		: std_logic := '0';
+	signal TRG_LED		: std_logic	:= '0';
+	signal LED_mode 	: std_logic	:= '0';
+	signal Veto_out	: std_logic	:= '0';
+	signal Busy_stop	: std_logic	:= '0';
+	signal Busy_start	: std_logic	:= '0';
 
-	 
 	-- Set registers
    signal mon_regs    : MONITOR_REGS_T;
    signal ctrl_regs   : CONTROL_REGS_T;
@@ -147,7 +168,7 @@ begin -- -------------------------------------------------
    SELF 	<= '0';
    nOEF 	<= '0';
 
-	-- Unused output ports are explicitally set to HiZ
+	-- Unused output ports are explicitly set to Hi Z
 	-- ----------------------------------------------------
    GOUT <= (others => 'Z');
    SELD <= 'Z';
@@ -157,12 +178,17 @@ begin -- -------------------------------------------------
 	-- Set the E ports unused for now
    E    <= (others => 'Z');
 
+	-- Initialization
+	-------------------------------------------------------
    -- Local bus Interrupt request
    nINT <= '1';
-   
+	
+	-- Local bus reset
+   reset <= not(nLBRES);
+
    -- User Led driver
    -- LED <= std_logic_vector(to_unsigned(DEMO_NUMBER,8)); 
-   reset <= not(nLBRES);
+
     
 	 
    -- Check if any of the digitizers are busy
@@ -179,7 +205,7 @@ begin -- -------------------------------------------------
          Busy_on	=> Busy_on
 		);
 
-   -- Encode start and stop of busy veto as 1 clk NIM
+   -- Encode start and stop of busy veto as 1 clk length NIM
 	-- ----------------------------------------------------
    I_OUT_ENCODE: entity work.output_encoding  
 		port map (
@@ -236,6 +262,7 @@ begin -- -------------------------------------------------
 				-- If there is no busy detected propagate the pulser
 				elsif Busy_on = '0' then 
 					TRG_LED 	<= GIN(1);
+					Veto_out <= '0';
 				else 
 					Veto_out <= '0';
 				end if;
@@ -245,10 +272,10 @@ begin -- -------------------------------------------------
 	-- ----------------------------------------------------
 
 		-- Hardware outputs
-      F(0)  <= TRG_LED;
-      F(1)  <= Veto_out;
-      F(2)  <= Busy_start;
-      F(3)  <= Busy_stop;
+      F(7)  <= TRG_LED;
+      F(6)  <= Veto_out;
+      F(5)  <= Busy_start;
+      F(4)  <= Busy_stop;
 		
       -- User LED outputs
       LED(0)	<= Veto_out;

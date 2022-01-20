@@ -3,8 +3,8 @@
 -- ----------------------------------------------------
 
 library ieee;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use work.V2495_pkg.all;
 
 entity veto_decision is
@@ -22,10 +22,10 @@ end veto_decision;
 
 architecture rtl of veto_decision is
 
-signal counter		: unsigned(31 downto 0) := (others => '0');
-signal max_counter: unsigned(31 downto 0) := (others => '0');
+signal counter		: unsigned(15 downto 0) := (others => '0');
+signal max_counter: unsigned(15 downto 0) := (others => '0');
 signal ones			: unsigned(63 downto 0) := (others => '1');
-signal busy_check	: std_logic;
+signal busy_check	: std_logic := '0';
 signal input		: std_logic_vector(63 downto 0) := (others => '0');
 
 begin
@@ -35,13 +35,13 @@ mon_regs(0)  <= std_logic_vector(to_unsigned(FWREV,32));  -- Firmware release ve
 mon_regs(1)	<= A;      -- Port A status
 mon_regs(2)	<= B;      -- Port B status
 
-max_counter	<= unsigned(ctrl_regs(1));
+max_counter	<= unsigned(ctrl_regs(1) (15 downto 0)) ;
 
 
 -- -------------------------------------------------
 input <= A & B;
 
--- Note that busy LVDS in CAEN V1724 is an active low signal 
+-- Note that busy LVDS in CAEN V17XX is an active low signal 
 	check_busy : process(clk) 
 	begin
 		if rising_edge(clk) then

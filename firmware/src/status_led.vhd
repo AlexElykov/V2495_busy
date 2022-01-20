@@ -3,8 +3,8 @@
 -- ----------------------------------------------------
 
 library ieee;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use work.V2495_pkg.all;
 
 entity status_led is
@@ -20,24 +20,27 @@ end status_led;
 
 architecture rtl of status_led is
 
-signal counter			: unsigned(31 downto 0) := (others => '0');
-signal max_counter	: unsigned(31 downto 0) := (others => '0');
+signal counter			: unsigned(15 downto 0) := (others => '0');
+signal max_counter	: unsigned(15 downto 0) := (others => '0');
 
 begin
 
-max_counter <= unsigned(ctrl_regs(0));
+max_counter <= unsigned(ctrl_regs(0) (15 downto 0));
 	
 	-- Check if there was an LED NIM in the last N interval of clk cycles
 	-- if there was one set LED_mode = '1'
 	check_LED : process(clk)
 	begin
 		if rising_edge(clk) then
+			
 			if Pulser_in = '1' then
 				counter <= (others => '0');
 			elsif counter < max_counter then
 				counter <= counter + 1;		
 			end if;
 			
+			-- Note: this means that after setting max_counter for the first time
+			-- LED_mode is '1' for (max_counter * clk ns) as logically counter /= max_counter
 			if counter = max_counter then
 				LED_mode <= '0';
 			else 

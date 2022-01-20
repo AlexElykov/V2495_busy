@@ -3,9 +3,8 @@
 -- ----------------------------------------------------
 
 library ieee;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use work.V2495_pkg.all;
 
 entity output_encoding is

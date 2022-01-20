@@ -101,8 +101,9 @@ begin --
   -- --------------------------
   --  Local Bus state machine
   -- --------------------------  
-  process(clk, reset)
+local_bus : process(clk, reset)
         variable rreg, wreg   : std_logic_vector(31 downto 0);
+  
   begin
     if (reset = '1') then
       nREADY        <= '1';
@@ -123,7 +124,7 @@ begin --
         -- If an address strobe is given,
         -- the address is latched and access type is decoded.
         when LBIDLE  =>  
-          LAD_oe   <= '0';
+          LAD_oe  <= '0';
           nREADY  <= '1';
           if (nADS = '0') then        -- start cycle
             addr <= LAD;              -- Address Sampling
@@ -156,7 +157,7 @@ begin --
           nREADY   <= '1';
           LBSTATE  <= LBIDLE;
           
-          if(addr<LOCALBUS_LAST_ADDRESS) then
+          if(addr < LOCALBUS_LAST_ADDRESS) then
             --loop on control registers
             for i in N_CONTROL_REGS-1 downto 0 loop 
               if std_logic_vector(unsigned(CONTROL_REGS_REGION_START)+
