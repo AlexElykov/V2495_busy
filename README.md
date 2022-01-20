@@ -19,7 +19,9 @@ This is a generic busy firmware for the V2495 module and it can be easily expand
 - Use of VHDL native libraries
 - The firmware is less bloated, uses separate entities not components
 - User defined registers implemented in the V2495_pkg not in the HAL, and can be accessed via the VME bus interface
+- Veto duration and TRG LED waiting window set via registers
 - Does not have the XENON1T/nT High Energy Veto input support
+- Added ModelSim testbench for firmware simulation 
 
 ![plot](./V2495_firmware_design.png)
 
