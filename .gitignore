@@ -35,7 +35,7 @@
 # Ignore Quartus II generated folders
 */db/
 */incremental_db/
-*/simulation/
+#*/simulation/
 */timing/
 */testbench/
 */*_sim/
@@ -46,4 +46,7 @@ hc_output/
 /firmware/output_files/*
 !/firmware/output_files/rpd_gen.cof
 !/firmware/output_files/*.rpd
+# keep testbench file
+/firmware/simulation/modelsim/*
+!/firmware/simulation/modelsim/V2495_tb.vht
 
