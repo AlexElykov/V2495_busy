@@ -30,5 +30,5 @@ This is a generic busy firmware for the V2495 module and it can be easily expand
 * firmware\src
 * firmware\
 * .rpd – compiled firmware file
-
+* notebooks - visualization of simulation results
 

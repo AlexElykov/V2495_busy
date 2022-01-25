@@ -49,4 +49,6 @@ hc_output/
 # keep testbench file
 /firmware/simulation/modelsim/*
 !/firmware/simulation/modelsim/V2495_tb.vht
+# ignore notebook checkpoints
+*/notebooks/.ipynb_checkpoints/
 
